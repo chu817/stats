@@ -1,0 +1,20 @@
+---
+title: "Untitled"
+author: "22MIA1045"
+date: "2023-11-07"
+output: html_document
+---
+```{r}
+library(ggplot2)
+ggplot(data=mtcars,aes(x=wt,y=mpg))+geom_point()
+mtcars
+```
+```{r}
+ggplot(iris,aes(x=Sepal.Length,y=Petal.Length,col=Species))+geom_point()
+```
+```{r}
+ggplot(iris,aes(x=Sepal.Length,y=Petal.Length,col=Species,shape=Species))+geom_point()
+```
+```{r}
+ggplot(iris,aes(x=Sepal.Length,y=Petal.Length,col=Species))+geom_point()+geom_smooth()
+```
