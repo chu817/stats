@@ -1,0 +1,88 @@
+---
+title: "Untitled"
+author: "22MIA1092"
+date: "2023-11-07"
+output: html_document
+---
+```{r}
+library(ggplot2)
+```
+```{r}
+data=MASS::survey
+
+```
+```{r}
+library(MASS)
+
+
+data("survey")
+survey_cleaned <- na.omit(survey)
+
+
+gender_counts <- table(survey_cleaned$Sex)
+barplot(gender_counts, main = "Male and Female Participants", ylab = "Frequency", col = c("blue", "red"))
+
+
+hand_counts <- table(survey_cleaned$W.Hnd)
+barplot(hand_counts, main = "Left Handers and Right Handers", ylab = "Count", col = c("green", "purple"))
+
+
+left_handed_counts <- table(survey_cleaned$W.Hnd, survey_cleaned$Sex)
+barplot(left_handed_counts, beside = TRUE, main = "Female Left Handers and Male Left Handers", ylab = "Count", col = c("blue", "pink"))
+
+
+hist(survey_cleaned$Age, main = "Age Distribution", xlab = "Age Range", ylab = "Frequency")
+
+
+plot(survey_cleaned$Age, survey_cleaned$Wr.Hnd, main = "Age vs. Writing Hand Span", xlab = "Age", ylab = "Writing Hand Span")
+
+
+boxplot(survey_cleaned$Pulse, main = "Pulse Rate Boxplot", ylab = "Pulse Rate")
+
+
+male_left_handed_smokers <- survey_cleaned$Smoke[survey_cleaned$W.Hnd == "Left" & survey_cleaned$Sex == "Male"]
+smoker_counts <- table(male_left_handed_smokers)
+pie(smoker_counts, main = "Smoking Habits of Male Left Handers", col = c("green", "red", "blue"))
+```
+
+```{r}
+data=read.csv(file='/home/ex5/Downloads/iris.csv')
+```
+```{r}
+
+library(ggplot2)
+library(dplyr)
+library(corrplot)
+library(outliers)
+
+
+data <- read.csv("iris.csv")
+
+
+summary(data)
+
+
+hist(data$Sepal.Length, main = "Histogram of Sepal Length", xlab = "Sepal Length")
+
+
+plot(data$Sepal.Length, data$Sepal.Width, main = "Scatter Plot of Sepal Length vs Sepal Width", xlab = "Sepal Length", ylab = "Sepal Width")
+
+
+boxplot(data$Petal.Length ~ data$Species, main = "Boxplot of Petal Length by Species", xlab = "Species", ylab = "Petal Length")
+
+
+correlation_matrix <- cor(data[, 1:4])
+corrplot(correlation_matrix, method = "color")
+
+
+outliers <- data[outlier(data$Sepal.Length)$ind, ]
+
+print("Outliers:")
+print(outliers)
+
+freq_table <- table(data$Species)
+print("Frequency Table:")
+print(freq_table)
+
+
+
